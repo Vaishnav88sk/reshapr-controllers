@@ -55,7 +55,7 @@ public class ConfigurationPlanSpec {
    private List<String> excludedOperations;
 
    @JsonPropertyDescription("The cache policy to apply")
-   private String cachePolicy;
+   private CachePolicy cachePolicy;
 
    public ServiceRef getService() {
       return service;
@@ -121,11 +121,11 @@ public class ConfigurationPlanSpec {
       this.excludedOperations = excludedOperations;
    }
 
-   public String getCachePolicy() {
+   public CachePolicy getCachePolicy() {
       return cachePolicy;
    }
 
-   public void setCachePolicy(String cachePolicy) {
+   public void setCachePolicy(CachePolicy cachePolicy) {
       this.cachePolicy = cachePolicy;
    }
 }

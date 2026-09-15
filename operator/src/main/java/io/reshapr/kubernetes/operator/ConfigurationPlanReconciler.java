@@ -128,7 +128,10 @@ public class ConfigurationPlanReconciler extends BaseReshaprReconciler<Configura
             remotePlan.setExcludedOperations(spec.getExcludedOperations());
          }
          if (spec.getCachePolicy() != null) {
-            remotePlan.setCachePolicy(spec.getCachePolicy());
+            io.reshapr.client.model.CachePolicy clientCachePolicy = new io.reshapr.client.model.CachePolicy();
+            clientCachePolicy.setTtlMs(spec.getCachePolicy().getTtlMs());
+            clientCachePolicy.setCacheScope(spec.getCachePolicy().getCacheScope());
+            remotePlan.setCachePolicy(clientCachePolicy);
          }
 
          if (backendSecretId != null) {
