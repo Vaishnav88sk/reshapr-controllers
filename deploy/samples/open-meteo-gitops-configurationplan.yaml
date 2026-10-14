@@ -10,3 +10,4 @@ spec:
     name: open-meteo-api
     version: '1.0'
   backendEndpoint: https://api.open-meteo.com
+  toolExposureMode: HYBRID

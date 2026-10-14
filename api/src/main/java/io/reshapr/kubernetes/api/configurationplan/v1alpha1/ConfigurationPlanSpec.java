@@ -26,7 +26,7 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "service", "backendEndpoint", "apiKey", "oauth2", "artifacts", "audit", "includedOperations", "excludedOperations", "cachePolicy", "headerPolicy" })
+@JsonPropertyOrder({ "service", "backendEndpoint", "apiKey", "oauth2", "artifacts", "audit", "includedOperations", "excludedOperations", "cachePolicy", "headerPolicy", "toolExposureMode" })
 @Buildable(editableEnabled = false, builderPackage = "io.fabric8.kubernetes.api.builder")
 public class ConfigurationPlanSpec {
 
@@ -59,6 +59,9 @@ public class ConfigurationPlanSpec {
 
    @JsonPropertyDescription("Header propagation policy controlling which request/response headers are forwarded to/from the backend")
    private HeaderPolicy headerPolicy;
+
+   @JsonPropertyDescription("How the gateway advertises the exposed operations to MCP clients. When absent, TOOLS applies.")
+   private ToolExposureMode toolExposureMode;
 
    public ServiceRef getService() {
       return service;
@@ -138,5 +141,13 @@ public class ConfigurationPlanSpec {
 
    public void setHeaderPolicy(HeaderPolicy headerPolicy) {
       this.headerPolicy = headerPolicy;
+   }
+
+   public ToolExposureMode getToolExposureMode() {
+      return toolExposureMode;
+   }
+
+   public void setToolExposureMode(ToolExposureMode toolExposureMode) {
+      this.toolExposureMode = toolExposureMode;
    }
 }

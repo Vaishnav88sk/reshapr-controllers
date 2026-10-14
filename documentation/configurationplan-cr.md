@@ -28,6 +28,7 @@ spec:
     version: 1.0.0
   backendEndpoint: https://api.open-meteo.com
   apiKey: true
+  toolExposureMode: HYBRID
   oauth2:
     clientId: my-client
     clientSecret: my-secret
@@ -86,6 +87,7 @@ status:
 | `excludedOperations`  | **Optional**. List of operation names to exclude from this plan. When provided, every operation of the Service is exposed except those listed. Mutually exclusive with `includedOperations`.                                                                                |
 | `cachePolicy`      | **Optional**. Caching configuration applied by the gateway. See _Cache policy_ below. When absent the proxy falls back to its built-in defaults.                                                                                                                             |
 | `headerPolicy`     | **Optional**. Header propagation policy controlling which request/response headers are forwarded to/from the backend. See _Header policy_ below. When absent the proxy applies its built-in defaults (e.g. `Authorization` and `Cookie` are stripped from backend requests). |
+| `toolExposureMode` | **Optional**. How the gateway advertises operations to MCP clients: `TOOLS` (one tool per operation), `CODE` (MCP Code Mode meta-tools only), or `HYBRID` (both). Defaults to `TOOLS`. |
 
 ### Service reference (`spec.service`)
 
@@ -157,6 +159,7 @@ spec:
     version: 0.0.1
   backendEndpoint: https://pastries.prod.acme.com
   apiKey: true
+  toolExposureMode: HYBRID
   oauth2:
     clientId: pastries-gateway
     clientSecret: change-me

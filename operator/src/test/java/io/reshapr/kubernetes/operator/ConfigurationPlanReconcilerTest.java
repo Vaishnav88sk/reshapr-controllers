@@ -27,6 +27,7 @@ import io.reshapr.kubernetes.api.configurationplan.v1alpha1.HeaderPolicy;
 import io.reshapr.kubernetes.api.configurationplan.v1alpha1.HeaderRename;
 import io.reshapr.kubernetes.api.configurationplan.v1alpha1.HeaderRules;
 import io.reshapr.kubernetes.api.configurationplan.v1alpha1.OAuth2Spec;
+import io.reshapr.kubernetes.api.configurationplan.v1alpha1.ToolExposureMode;
 import io.reshapr.kubernetes.api.model.ServiceRef;
 import io.reshapr.kubernetes.operator.auth.ReshaprAnnotations;
 import io.reshapr.kubernetes.operator.auth.ReshaprApiClientFactory;
@@ -108,6 +109,7 @@ class ConfigurationPlanReconcilerTest {
       spec.setExcludedOperations(List.of("deletePastry"));
       spec.setCachePolicy(cache);
       spec.setHeaderPolicy(headerPolicy);
+      spec.setToolExposureMode(ToolExposureMode.HYBRID);
 
       Map<String, String> annotations = new HashMap<>();
       annotations.put(ReshaprAnnotations.INSTANCE, "reshapr-control-plane-ctrl.reshapr-system");
@@ -206,6 +208,7 @@ class ConfigurationPlanReconcilerTest {
          assertNotNull(sentPlan.getHeaderPolicy().getResponse());
          assertEquals(List.of("X-Response-Id"),
                sentPlan.getHeaderPolicy().getResponse().getAllow());
+         assertEquals(io.reshapr.client.model.ToolExposureMode.HYBRID, sentPlan.getToolExposureMode());
 
          // Status must reflect a successful reconciliation
          assertNotNull(cp.getStatus());
@@ -217,7 +220,7 @@ class ConfigurationPlanReconcilerTest {
    }
 
    @Test
-   void doReconcile_withMinimalSpec_doesNotEmitOptionalPolicies() throws Exception {
+   void doReconcile_withMinimalSpec_usesDefaultToolExposureMode() throws Exception {
       ReshaprApiClientFactory factory = mock(ReshaprApiClientFactory.class);
       ConfigurationPlanReconciler reconciler = new ConfigurationPlanReconciler(factory);
       ApiClient apiClient = mock(ApiClient.class);
@@ -269,6 +272,7 @@ class ConfigurationPlanReconcilerTest {
          assertNull(sentPlan.getBackendSecretId());
          assertNull(sentPlan.getCachePolicy());
          assertNull(sentPlan.getHeaderPolicy());
+         assertEquals(io.reshapr.client.model.ToolExposureMode.TOOLS, sentPlan.getToolExposureMode());
          assertTrue(sentPlan.getIncludedOperations() == null || sentPlan.getIncludedOperations().isEmpty());
          assertTrue(sentPlan.getExcludedOperations() == null || sentPlan.getExcludedOperations().isEmpty());
       }
