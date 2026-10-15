@@ -24,6 +24,12 @@ Latest release version is `0.0.3`.
 
 Current development version is `0.0.4-SNAPSHOT`.
 
+## Compatibility
+
+| reShapr control plane | Minimum reshapr-controllers version |
+|-----------------------|-------------------------------------|
+| `1.1`                 | `0.0.4`                             |
+
 ## How it works
 
 `reshapr-controllers` drives an **existing** reShapr control plane declaratively via
