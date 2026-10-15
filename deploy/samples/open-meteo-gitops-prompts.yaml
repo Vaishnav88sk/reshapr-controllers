@@ -1,0 +1,23 @@
+apiVersion: reshapr.io/v1alpha1
+kind: Prompts
+metadata:
+  name: open-meteo-gitops-prompts
+  annotations:
+    reshapr.io/instance: reshapr-control-plane-ctrl.reshapr-system
+    reshapr.io/organization: reshapr
+spec:
+  service:
+    name: open-meteo-api
+    version: '1.0'
+  prompts:
+    travel_advice:
+      title: Travel advice
+      description: Packing advice for a trip, based on the weather forecast
+      arguments:
+        - name: city
+          title: City
+          description: The city you are travelling to
+          required: true
+      result: |
+        Use the weather forecast tool for ${city} for the next 5 days,
+        then tell me what to pack in 3 bullet points.
