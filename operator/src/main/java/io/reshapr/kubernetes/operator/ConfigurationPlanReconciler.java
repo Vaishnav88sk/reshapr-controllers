@@ -142,6 +142,10 @@ public class ConfigurationPlanReconciler extends BaseReshaprReconciler<Configura
          if (spec.getHeaderPolicy() != null) {
             remotePlan.setHeaderPolicy(toClientHeaderPolicy(spec.getHeaderPolicy()));
          }
+         if (spec.getToolExposureMode() != null) {
+            remotePlan.setToolExposureMode(
+                  io.reshapr.client.model.ToolExposureMode.valueOf(spec.getToolExposureMode().name()));
+         }
 
          if (backendSecretId != null) {
             remotePlan.setBackendSecretId(backendSecretId);
