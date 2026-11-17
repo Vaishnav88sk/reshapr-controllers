@@ -1,0 +1,16 @@
+apiVersion: reshapr.io/v1alpha1
+kind: ToolsOutputFilters
+metadata:
+  name: open-meteo-gitops-output-filters
+  annotations:
+    reshapr.io/instance: reshapr-control-plane-ctrl.reshapr-system
+    reshapr.io/organization: reshapr
+spec:
+  service:
+    name: open-meteo-api
+    version: '1.0'
+  filters:
+    get_v1_forecast:
+      compact: true
+      convertToToon: true
+

@@ -36,6 +36,7 @@ extend a running reShapr **control plane** with a Kubernetes-native experience:
 | [`Resources`](./resources-cr.md)                     | Namespaced | Attach static/remote resources and resources templates to an existing Service. |
 | [`Prompts`](./prompts-cr.md)                         | Namespaced | Attach prompt templates to an existing Service.                             |
 | [`Skills`](./skills-cr.md)                           | Namespaced | Attach Agent Skills (served over MCP) to an existing Service.               |
+| [`ToolsOutputFilters`](./toolsoutputfilters-cr.md)   | Namespaced | Attach tool output filtering rules to an existing Service.                  |
 
 ### Admission webhook
 
